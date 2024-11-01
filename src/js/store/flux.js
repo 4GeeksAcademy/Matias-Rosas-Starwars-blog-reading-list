@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             storecharacters: [], // Lista de personajes con detalles
             storecharacterswithUid: [],
-            storecharacterswithProperties: []
+            storecharacterswithProperties: [],
+            singlecharacter: null
         },
         actions: {
             getCharactersWithUid: () => {
@@ -18,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               },
               fetchCharactersWithProperties: () => {
                 const fetchedCharacters = [];
-                for (let index = 1; index <= 9; index++) {
+                for (let index = 1; index <= 10; index++) {
                   fetch(`https://www.swapi.tech/api/people/${index}`)
                     .then((resp) => resp.json())
                     .then((data) => {
@@ -30,6 +31,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
                     .catch((error) => console.log(error));
                 }
+              },
+              getCharacter: (contactID) => {
+                fetch(`https://www.swapi.tech/api/people/${contactID}`)
+                .then((resp) => resp.json())
+                .then((data) => {
+                  setStore({singlecharacter: data.result.properties})
+                  console.log("este es el character con el contactid numero: ", contactID, " y estas son sus propiedades:  ", data.result.properties)
+                })
+                .catch((error) => console.log(error));
               }
         }
     };
