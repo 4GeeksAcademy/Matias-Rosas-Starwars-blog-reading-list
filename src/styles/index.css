@@ -1,3 +1,7 @@
 /* 
     General Styles
 */
+.font {
+    font-size: 1.0em;
+    font-family: Impact, fantasy;
+}
