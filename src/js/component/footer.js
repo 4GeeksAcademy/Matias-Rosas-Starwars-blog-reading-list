@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center bg-dark text-white">
+	<footer className="footer mt-auto py-3 text-center bg-black text-white">
 		<p>
 			Made with <i className="fa fa-heart text-danger" /> by{" Matias Rosas from "}
 			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>

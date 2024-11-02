@@ -3,13 +3,6 @@ import React,{ useEffect, useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
-const vehicles = [
-  { name: "X-wing", model: "T-65 X-wing", manufacturer: "Incom Corporation" },
-  { name: "TIE Fighter", model: "Twin Ion Engine Fighter", manufacturer: "Sienar Fleet Systems" },
-  { name: "X-wing", model: "T-65 X-wing", manufacturer: "Incom Corporation" },
-  { name: "TIE Fighter", model: "Twin Ion Engine Fighter", manufacturer: "Sienar Fleet Systems" },
-  // Agrega más vehículos aquí si es necesario
-];
 
 function Vehicles() {
   const [combinedVehicles, setCombinedVehicles] = useState([]);
@@ -35,10 +28,10 @@ function Vehicles() {
 
 
   return (
-    <div className="container-fluid py-2">
-      <h2 className="text-danger">Vehicles</h2>
+    <div className="container-fluid py-2 mb-3 border border-warning">
+      <h2 className="text-warning">Vehicles</h2>
       <div className='d-flex overflow-auto' style={{ whiteSpace: "nowrap" }}>
-      {combinedVehicles.length === 0 ? (<p className='text-secondary fst-italic'>Loading Vehicles...</p>) :
+      {combinedVehicles.length === 0 ? (<p className='text-secondary fst-italic'>Stay strong while the force is loading...</p>) :
       combinedVehicles.map((vehicle, index) => (
         <div key={index} style={{ minWidth: "300px", marginRight: "15px" }}>
           <div className="card mb-4">
@@ -51,7 +44,7 @@ function Vehicles() {
               </p>
               <div className="d-flex justify-content-between">
                 <a className="btn text-dark btn btn-warning fw-bolder" onClick={() => navigate(`/VehicleDetails/${vehicle.uid}`)}>Learn more!</a>
-                <button className="btn btn-outline-dark">♡</button>
+                <button className="btn btn-outline-light">♡</button>
               </div>
             </div>
           </div>

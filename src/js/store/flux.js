@@ -1,4 +1,4 @@
-// flux.js 4:35PM
+// flux.js 
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
@@ -7,8 +7,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             singlecharacter: null,
             vehicleswithUid: [],
             vehicleswithProperties: [],
-            vechicle: null
-
+            vechicle: null,
+            planetswithUid: [],
+            planetswithProperties: [],
+            planet: null
         },
         actions: {
             getCharactersWithUid: () => {
@@ -44,14 +46,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 })
                 .catch((error) => console.log(error));
               },
-              getVehiclesWithUid: () => {
-                fetch('https://www.swapi.tech/api/vehicles')
-                  .then((resp) => resp.json())
-                  .then((data) => {
-                    setStore({vehicleswithUid: data.results});
-                    console.log("Array de vehicles (getVehicles): ", data.results);
-                  })
-                  .catch((error) => console.log(error));
+              getVehiclesWithUid: async () => {
+                try {
+                  let response = await fetch('https://www.swapi.tech/api/vehicles')
+                  let data = await response.json()
+                  setStore({vehicleswithUid: data.results});
+                  console.log("Array de vehicles (getVehicles): ", data.results);
+                } catch (error) {
+                  console.log("aqui esta el error: ", error)
+                }
               },
               fetchVehiclesWithProperties: () => {
                 const fetchedVehicles = [];
@@ -63,12 +66,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                           fetchedVehicles.push(data.result.properties);
                           if (fetchedVehicles.length === vehicleIds.length) {
                               setStore({ vehicleswithProperties: fetchedVehicles });
-                              console.log("Fetched vehicles (fetchVehiclesWithProperties): ", fetchedVehicles);
+                              console.log("Fetched vehicles (fetchVehiclesWithProperties): ", data);
                           }
                       })
                       .catch((error) => console.log(error));
               });
-            }
+            },
+            getVehicle: (vehicleID) => {
+              fetch(`https://www.swapi.tech/api/vehicles/${vehicleID}`)
+              .then((resp) => resp.json())
+              .then((data) => {
+                setStore({vechicle: data.result.properties})
+                console.log("este es el Vehicle con el vehicleID numero: ", vehicleID, " y estas son sus propiedades:  ", data.result.properties)
+              })
+              .catch((error) => console.log(error));
+            },
+            fetchPlanetsWithProperties: () => {
+              // const fetchedPlanets = [];
+              // for (let index = 1; index <= 10; index++) {
+                fetch("https://www.swapi.tech/api/planets/1")
+                  .then((resp) => resp.json())
+                  .then((data) => {
+                      console.log("Fetched planets (fetchPlanetsWithProperties): ", data);
+                  })
+                  .catch((error) => console.log(error));
+              // }
+            }, 
         }
     };
 };

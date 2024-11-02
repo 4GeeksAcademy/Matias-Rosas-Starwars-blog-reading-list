@@ -25,10 +25,10 @@ const Characters = () => {
   }, [store.storecharacterswithProperties,store.storecharacterswithUid]);
 
   return (
-    <div className='container-fluid py-2'>
-      <h2 className="text-danger">Characters</h2>
+    <div className='container-fluid py-2 mb-3 border border-warning'>
+      <h2 className="text-warning">Characters</h2>
       <div className="d-flex overflow-auto" style={{ whiteSpace: "nowrap" }}>
-        {combinedCharacters.length === 0 ? (<p className='text-secondary fst-italic'>Loading Characters...</p>) :
+        {combinedCharacters.length === 0 ? (<p className='text-secondary fst-italic'>Stay strong while the force is loading...</p>) :
         combinedCharacters.map((character, index) => (
           <div key={index} style={{ minWidth: "300px", marginRight: "15px" }}>
             <div className="card mb-4">
@@ -49,7 +49,7 @@ const Characters = () => {
                   >
                     Learn more!
                   </button>
-                  <button className="btn btn-outline-dark">♡</button>
+                  <button className="btn btn-outline-light">♡</button>
                 </div>
               </div>
             </div>

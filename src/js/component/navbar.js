@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
   const navigate = useNavigate();
 	return (
-		<nav className="navbar navbar-expand-lg bg-dark">
+		<nav className="navbar bg-black border border-warning">
     <div className="container mx-1">
       <div className="mx-1 mb-0">
-       <a><h1 className="navbar-brand  badge text-wrap text-warning d-block" onClick={() => navigate("/")}  style={{fontSize: '1.9em', fontFamily: 'Impact, fantasy', textAlign: 'start', padding: '0,0,0,0'}}>Star<br />Wars</h1>
+       <a><h1 className="navbar-brand  badge text-wrap text-warning d-block" onClick={() => navigate("/")}  style={{fontSize: '2.3em', fontFamily: 'Impact, fantasy', textAlign: 'start', padding: '0,0,0,0'}}>Star<br />Wars</h1>
        </a>
-      
       </div>
       <div className="d-flex align-items-center">
         <span className="me-2 text-dark btn btn-warning fw-bolder">Favorites <span className="badge bg-secondary">0</span></span>

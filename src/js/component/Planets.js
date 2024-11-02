@@ -1,5 +1,8 @@
 // Planets.js
-import React from 'react';
+import React,{ useEffect, useState,useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Context } from "../store/appContext";
+
 
 const planets = [
   { name: "Tatooine", climate: "arid", population: "200000" },
@@ -10,9 +13,13 @@ const planets = [
 ];
 
 function Planets() {
+  const { store, actions } = useContext(Context);
+
+
+  actions.fetchPlanetsWithProperties();
   return (
-    <div className="row">
-      <h2 className="text-danger">Planets</h2>
+    <div className="container-fluid py-2 mb-3 border border-warning">
+      <h2 className="text-warning">Planets</h2>
       <div className='d-flex overflow-auto' style={{ whiteSpace: "nowrap" }}>
       {planets.map((planet, index) => (
         <div key={index} style={{ minWidth: "300px", marginRight: "15px" }}>
@@ -26,7 +33,7 @@ function Planets() {
               </p>
               <div className="d-flex justify-content-between">
                 <a href="#" className="btn text-dark btn btn-warning fw-bolder">Learn more!</a>
-                <button className="btn btn-outline-dark">♡</button>
+                <button className="btn btn-outline-light">♡</button>
               </div>
             </div>
           </div>
