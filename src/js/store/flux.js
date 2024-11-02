@@ -2,10 +2,13 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-            storecharacters: [], // Lista de personajes con detalles
             storecharacterswithUid: [],
             storecharacterswithProperties: [],
-            singlecharacter: null
+            singlecharacter: null,
+            vehicleswithUid: [],
+            vehicleswithProperties: [],
+            vechicle: null
+
         },
         actions: {
             getCharactersWithUid: () => {
@@ -40,7 +43,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                   console.log("este es el character con el contactid numero: ", contactID, " y estas son sus propiedades:  ", data.result.properties)
                 })
                 .catch((error) => console.log(error));
-              }
+              },
+              getVehiclesWithUid: () => {
+                fetch('https://www.swapi.tech/api/vehicles')
+                  .then((resp) => resp.json())
+                  .then((data) => {
+                    setStore({vehicleswithUid: data.results});
+                    console.log("Array de vehicles (getVehicles): ", data.results);
+                  })
+                  .catch((error) => console.log(error));
+              },
+              fetchVehiclesWithProperties: () => {
+                const fetchedVehicles = [];
+                const vehicleIds = [4, 6, 7, 8, 14, 16, 18, 20, 24]; // IDs específicos de los vehículos
+                vehicleIds.forEach((id) => {
+                  fetch(`https://www.swapi.tech/api/vehicles/${id}`)
+                      .then((resp) => resp.json())
+                      .then((data) => {
+                          fetchedVehicles.push(data.result.properties);
+                          if (fetchedVehicles.length === vehicleIds.length) {
+                              setStore({ vehicleswithProperties: fetchedVehicles });
+                              console.log("Fetched vehicles (fetchVehiclesWithProperties): ", fetchedVehicles);
+                          }
+                      })
+                      .catch((error) => console.log(error));
+              });
+            }
         }
     };
 };

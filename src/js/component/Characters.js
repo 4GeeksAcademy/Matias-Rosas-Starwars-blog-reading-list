@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
 const Characters = () => {
-  // const [characterswithProperties, setCharactersWithProperties] = useState([]);
-  // const [characterswithUid, setCharactersWithUid] = useState([]);
   const [combinedCharacters, setCombinedCharacters] = useState([]);
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
@@ -30,8 +28,8 @@ const Characters = () => {
     <div className='container-fluid py-2'>
       <h2 className="text-danger">Characters</h2>
       <div className="d-flex overflow-auto" style={{ whiteSpace: "nowrap" }}>
-        {console.log("este es el combinedCharacters del html: ", combinedCharacters)}
-        {combinedCharacters.map((character, index) => (
+        {combinedCharacters.length === 0 ? (<p className='text-secondary fst-italic'>Loading Characters...</p>) :
+        combinedCharacters.map((character, index) => (
           <div key={index} style={{ minWidth: "300px", marginRight: "15px" }}>
             <div className="card mb-4">
               <img src="https://via.placeholder.com/400x200" className="card-img-top" alt={character.name} />
