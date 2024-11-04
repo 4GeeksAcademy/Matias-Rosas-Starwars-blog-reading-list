@@ -3,25 +3,33 @@ import React,{ useEffect, useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
-
-const planets = [
-  { name: "Tatooine", climate: "arid", population: "200000" },
-  { name: "Hoth", climate: "frozen", population: "unknown" },
-  { name: "Tatooine", climate: "arid", population: "200000" },
-  { name: "Hoth", climate: "frozen", population: "unknown" },
-  // Agrega más planetas aquí si es necesario
-];
-
+// Falta hacer el PLANETDETAILS y el useparams y todo
 function Planets() {
   const { store, actions } = useContext(Context);
+  const [combinedPlanets, setCombinedPlanets] = useState([]);
 
+  useEffect(() => {
+    actions.getPlanetsWithUid();
+    actions.fetchPlanetsWithProperties();
+  }, []);
 
-  actions.fetchPlanetsWithProperties();
+  useEffect(() => {
+    if (store.planetswithProperties.length && store.planetswithUid.length) {
+      const combined = store.planetswithUid.map(planet => {
+        const properties = store.planetswithProperties.find(prop => prop.name  === planet.name);
+        return { ...planet, ...properties };
+      });
+      setCombinedPlanets(combined);
+      console.log("combinedPlanets: ", combined);
+    }
+  }, [store.planetswithProperties,store.planetswithUid]);
+
   return (
     <div className="container-fluid py-2 mb-3 border border-warning">
       <h2 className="text-warning">Planets</h2>
       <div className='d-flex overflow-auto' style={{ whiteSpace: "nowrap" }}>
-      {planets.map((planet, index) => (
+      {combinedPlanets.length === 0 ? (<p className='text-secondary fst-italic'>Stay strong while the force is loading...</p>) :
+      combinedPlanets.map((planet, index) => (
         <div key={index} style={{ minWidth: "300px", marginRight: "15px" }}>
           <div className="card mb-4">
             <img src="https://via.placeholder.com/400x200" className="card-img-top" alt={planet.name} />

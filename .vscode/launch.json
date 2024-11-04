@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "chrome", // o "edge" si usas Edge
+        "request": "launch",
+        "name": "Launch Chrome to debug React",
+        "url": "http://localhost:3000", // La URL de tu aplicación React
+        "webRoot": "${workspaceFolder}/src"
+      }
+    ]
+  }

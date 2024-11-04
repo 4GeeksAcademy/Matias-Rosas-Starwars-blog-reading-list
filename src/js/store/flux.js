@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             vechicle: null,
             planetswithUid: [],
             planetswithProperties: [],
-            planet: null
+            planet: null,
+            favorites: []
         },
         actions: {
             getCharactersWithUid: () => {
@@ -29,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then((resp) => resp.json())
                     .then((data) => {
                       fetchedCharacters.push(data.result.properties);
-                      if (fetchedCharacters.length === 9) {
+                      if (fetchedCharacters.length === 10) {
                         setStore({storecharacterswithProperties: fetchedCharacters});
                         console.log("Fetched characters (fetchCharactersWithProperties): ", fetchedCharacters);
                       }
@@ -81,17 +82,39 @@ const getState = ({ getStore, getActions, setStore }) => {
               })
               .catch((error) => console.log(error));
             },
+            getPlanetsWithUid: async () => {
+              try {
+                let response = await fetch('https://www.swapi.tech/api/planets')
+                let data = await response.json()
+                setStore({planetswithUid: data.results});
+                console.log("Array de planets (getPlanetsWithUid): ", data.results);
+              } catch (error) {
+                console.log("aqui esta el error: ", error)
+              }
+            },
             fetchPlanetsWithProperties: () => {
-              // const fetchedPlanets = [];
-              // for (let index = 1; index <= 10; index++) {
-                fetch("https://www.swapi.tech/api/planets/1")
+              const fetchedPlanets = [];
+              for (let index = 1; index <= 10; index++) {
+                fetch(`https://www.swapi.tech/api/planets/${index}`)
                   .then((resp) => resp.json())
                   .then((data) => {
-                      console.log("Fetched planets (fetchPlanetsWithProperties): ", data);
+                    fetchedPlanets.push(data.result.properties);
+                    if (fetchedPlanets.length === 10) {
+                    setStore({ planetswithProperties: fetchedPlanets });
+                      console.log("Fetched planets (fetchPlanetsWithProperties): ", fetchedPlanets);
+                    }
                   })
                   .catch((error) => console.log(error));
-              // }
-            }, 
+              }
+            },
+            updateFavorites: (characterName) => {
+              const store = getStore();
+              if(store.favorites.includes(characterName)) {
+                setStore({favorites: store.favorites.filter(name => name !== characterName)})
+              } else {
+                setStore({favorites: [...store.favorites, characterName]})
+              }
+            } 
         }
     };
 };

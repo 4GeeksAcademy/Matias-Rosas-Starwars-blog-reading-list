@@ -6,11 +6,16 @@ const Characters = () => {
   const [combinedCharacters, setCombinedCharacters] = useState([]);
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
+  const [clickedCharacters, setClickedCharacters] = useState([]);
 
   useEffect(() => {
     actions.getCharactersWithUid();
     actions.fetchCharactersWithProperties();
   }, []);
+
+  function handleClick (characterName) {
+    actions.updateFavorites(characterName);
+  };
 
   // Este useEffect combina los datos una vez que ambos arrays están llenos
   useEffect(() => {
@@ -49,7 +54,7 @@ const Characters = () => {
                   >
                     Learn more!
                   </button>
-                  <button className="btn btn-outline-light">♡</button>
+                  <button className={`heartbtn ${store.favorites.includes(character.name) ? "clicked" : ""}`} onClick={() => handleClick(character.name)}>♡</button>
                 </div>
               </div>
             </div>
