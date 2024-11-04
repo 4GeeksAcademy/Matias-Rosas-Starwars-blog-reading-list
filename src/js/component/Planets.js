@@ -7,6 +7,8 @@ import { Context } from "../store/appContext";
 function Planets() {
   const { store, actions } = useContext(Context);
   const [combinedPlanets, setCombinedPlanets] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     actions.getPlanetsWithUid();
@@ -45,7 +47,7 @@ function Planets() {
                 <strong>Population:</strong> {planet.population}
               </p>
               <div className="d-flex justify-content-between">
-                <a href="#" className="btn text-dark btn btn-warning fw-bolder">Learn more!</a>
+                <a href="#" className="btn text-dark btn btn-warning fw-bolder" onClick={() => navigate(`/PlanetDetails/${planet.uid}`)}>Learn more!</a>
                 <button className={`heartbtn ${store.favorites.includes(planet.name) ? "clicked" : ""}`} onClick={() => handleClick(planet.name)}>♡</button>
               </div>
             </div>

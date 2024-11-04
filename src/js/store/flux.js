@@ -114,7 +114,17 @@ const getState = ({ getStore, getActions, setStore }) => {
               } else {
                 setStore({favorites: [...store.favorites, objectname]}) //Si no incluye el nombre, lo agrega
               }
-            } 
+            },
+            getPlanet: (planetID) => {
+              fetch(`https://www.swapi.tech/api/planets/${planetID}`)
+              .then((resp) => resp.json())
+              .then((data) => {
+                setStore({planet: data.result.properties})
+                console.log("este es el Planet con el planetID numero: ", planetID, " y estas son sus propiedades:  ", data.result.properties)
+              })
+              .catch((error) => console.log(error));
+            },
+            
         }
     };
 };

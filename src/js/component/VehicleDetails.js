@@ -1,4 +1,3 @@
-//ACA COPIAR BASICAMENTE EL ARCHIVO CHARACTERDETAILS.JS
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
