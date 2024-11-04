@@ -25,7 +25,9 @@ function Vehicles() {
     }
   }, [store.vehicleswithProperties,store.vehicleswithUid]);
 
-
+  function handleClick (objectname) {
+    actions.updateFavorites(objectname);
+  };
 
   return (
     <div className="container-fluid py-2 mb-3 border border-warning">
@@ -44,7 +46,7 @@ function Vehicles() {
               </p>
               <div className="d-flex justify-content-between">
                 <a className="btn text-dark btn btn-warning fw-bolder" onClick={() => navigate(`/VehicleDetails/${vehicle.uid}`)}>Learn more!</a>
-                <button className="btn btn-outline-light">♡</button>
+                <button className={`heartbtn ${store.favorites.includes(vehicle.name) ? "clicked" : ""}`} onClick={() => handleClick(vehicle.name)}>♡</button>
               </div>
             </div>
           </div>

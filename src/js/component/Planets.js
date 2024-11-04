@@ -24,6 +24,11 @@ function Planets() {
     }
   }, [store.planetswithProperties,store.planetswithUid]);
 
+  function handleClick (objectname) {
+    actions.updateFavorites(objectname);
+  };
+
+
   return (
     <div className="container-fluid py-2 mb-3 border border-warning">
       <h2 className="text-warning">Planets</h2>
@@ -41,7 +46,7 @@ function Planets() {
               </p>
               <div className="d-flex justify-content-between">
                 <a href="#" className="btn text-dark btn btn-warning fw-bolder">Learn more!</a>
-                <button className="btn btn-outline-light">♡</button>
+                <button className={`heartbtn ${store.favorites.includes(planet.name) ? "clicked" : ""}`} onClick={() => handleClick(planet.name)}>♡</button>
               </div>
             </div>
           </div>

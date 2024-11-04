@@ -6,15 +6,14 @@ const Characters = () => {
   const [combinedCharacters, setCombinedCharacters] = useState([]);
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
-  const [clickedCharacters, setClickedCharacters] = useState([]);
 
   useEffect(() => {
     actions.getCharactersWithUid();
     actions.fetchCharactersWithProperties();
   }, []);
 
-  function handleClick (characterName) {
-    actions.updateFavorites(characterName);
+  function handleClick (objectname) {
+    actions.updateFavorites(objectname);
   };
 
   // Este useEffect combina los datos una vez que ambos arrays están llenos

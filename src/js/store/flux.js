@@ -107,12 +107,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                   .catch((error) => console.log(error));
               }
             },
-            updateFavorites: (characterName) => {
+            updateFavorites: (objectname) => {
               const store = getStore();
-              if(store.favorites.includes(characterName)) {
-                setStore({favorites: store.favorites.filter(name => name !== characterName)})
+              if(store.favorites.includes(objectname)) {
+                setStore({favorites: store.favorites.filter(name => name !== objectname)})//Si incluye el nombre, lo elimina (filtra)
               } else {
-                setStore({favorites: [...store.favorites, characterName]})
+                setStore({favorites: [...store.favorites, objectname]}) //Si no incluye el nombre, lo agrega
               }
             } 
         }
