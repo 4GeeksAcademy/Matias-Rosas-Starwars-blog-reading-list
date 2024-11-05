@@ -28,7 +28,7 @@ function Vehicles() {
   function handleClick (objectname) {
     actions.updateFavorites(objectname);
   };
-
+  
   return (
     <div className="container-fluid py-2 mb-3 border border-warning">
       <h2 className="text-warning">Vehicles</h2>
@@ -37,7 +37,7 @@ function Vehicles() {
       combinedVehicles.map((vehicle, index) => (
         <div key={index} style={{ minWidth: "300px", marginRight: "15px" }}>
           <div className="card mb-4">
-            <img src="https://via.placeholder.com/400x200" className="card-img-top" alt={vehicle.name} />
+            <img src={`${store.vehiclesimgs[vehicle.uid] || 'https://via.placeholder.com/400x200'}`} className="card-img-top" alt={vehicle.name} style={{width: 400, height: 200}} />
             <div className="card-body">
               <h5 className="card-title">{vehicle.name}</h5>
               <p className="card-text">

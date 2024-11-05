@@ -1,12 +1,23 @@
 {
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-      {
-        "type": "chrome", // o "edge" si usas Edge
-        "request": "launch",
-        "name": "Launch Chrome to debug React",
-        "url": "http://localhost:3000", // La URL de tu aplicación React
-        "webRoot": "${workspaceFolder}/src"
-      }
+        {
+            "name": "Launch Edge",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
+        },
+        
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Iniciar Chrome para localhost",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
+        }
     ]
-  }
+}

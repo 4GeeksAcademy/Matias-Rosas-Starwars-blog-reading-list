@@ -29,7 +29,7 @@ export const Navbar = () => {
           <span className="dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             
           </span>
-          <ul className="dropdown-menu dropdown-menu-end">
+          <ul className="dropdown-menu dropdown-menu-end mt-2">
           {favorites.length === 0 ? (
                 <li><span className="dropdown-item">(empty)</span></li>
               ) : (

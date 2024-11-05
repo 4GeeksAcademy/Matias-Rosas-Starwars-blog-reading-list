@@ -37,9 +37,9 @@ function Planets() {
       <div className='d-flex overflow-auto' style={{ whiteSpace: "nowrap" }}>
       {combinedPlanets.length === 0 ? (<p className='text-secondary fst-italic'>Stay strong while the force is loading...</p>) :
       combinedPlanets.map((planet, index) => (
-        <div key={index} style={{ minWidth: "300px", marginRight: "15px" }}>
-          <div className="card mb-4">
-            <img src="https://via.placeholder.com/400x200" className="card-img-top" alt={planet.name} />
+        <div key={index} style={{ minWidth: "300px", minHeight: "400px", marginRight: "15px" }}>
+          <div className="card mb-4" style={{width: 400, height: 300}}>
+            <img src={`${store.planetsimg[planet.uid] || 'https://via.placeholder.com/400x200'}`} className="card-img-top" alt={planet.name} style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
             <div className="card-body">
               <h5 className="card-title">{planet.name}</h5>
               <p className="card-text">

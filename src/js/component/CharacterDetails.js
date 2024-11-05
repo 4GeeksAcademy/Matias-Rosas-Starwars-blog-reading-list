@@ -16,7 +16,7 @@ function CharacterDetails() {
     <div className="container">
       <div className="row mt-4">
         <div className="col-md-6">
-          <img src="https://via.placeholder.com/800x600" className="img-fluid" alt="Character" />
+          <img src={`${store.charactersimgs[id] || 'https://via.placeholder.com/800x600'}`} className="img-fluid" alt="Character" style={{width: 800, height: 300}}/>
         </div>
         <div className="col-md-6">
           <h1 className="text-white">{store.singlecharacter ? store.singlecharacter.name : "Loading..."}</h1>
